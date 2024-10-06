@@ -13,3 +13,6 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
+
+// startup banner for ops visibility
+
