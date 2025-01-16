@@ -23,3 +23,5 @@ func checkSession(s string) error {
 	}
 	return nil
 }
+
+// note: checkURL already permits query strings via ParseRequestURI; no change needed.
