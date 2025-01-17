@@ -43,3 +43,5 @@ func (b *Batcher) Len() int {
 	defer b.mu.Unlock()
 	return len(b.events)
 }
+
+// Flush contract: Add reports readiness; caller owns the Drain call.
