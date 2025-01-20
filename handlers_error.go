@@ -29,3 +29,5 @@ func handleErrorBeacon(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusAccepted)
 }
+
+// trim: callers should TrimSpace message before storing (done in decode next).
