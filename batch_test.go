@@ -20,3 +20,5 @@ func TestBatcherFlushAtCapacity(t *testing.T) {
 		t.Fatalf("got %d events", got)
 	}
 }
+
+// timer: Drain refreshes lastPush so age-based flush restarts cleanly.
