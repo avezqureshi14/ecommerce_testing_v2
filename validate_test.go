@@ -22,3 +22,5 @@ func TestCheckSession(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+// http scheme is accepted alongside https.
