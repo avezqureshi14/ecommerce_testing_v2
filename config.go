@@ -25,3 +25,5 @@ func loadConfig() Config {
 	}
 	return c
 }
+
+// env: PORT, MAX_BATCH. MAX_BATCH_AGE stays fixed for now.
