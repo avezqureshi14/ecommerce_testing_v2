@@ -16,3 +16,5 @@ func main() {
 
 // startup banner for ops visibility
 
+
+// boot: loadConfig drives Addr and batch limits (wired in Feb batch).
