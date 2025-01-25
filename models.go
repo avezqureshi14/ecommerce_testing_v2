@@ -23,3 +23,5 @@ type VitalBeacon struct {
 	Name      string  `json:"name"`
 	Value     float64 `json:"value"`
 }
+
+// SessionID is issued by the demo snippet and must be at least 8 chars.
