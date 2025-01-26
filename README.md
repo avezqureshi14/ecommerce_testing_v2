@@ -10,3 +10,5 @@ curl localhost:8080/health
 
 `POST /v1/beacon/pageview`, `/v1/beacon/error`, `/v1/beacon/vitals` accept JSON
 up to 64KB. Events batch in memory; `/health` reports depth.
+
+Flush rule: 200 events or 5s, whichever comes first.
