@@ -3,18 +3,20 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 func main() {
-	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintln(w, "ok")
-	})
-	fmt.Println("browser-monitor starting on :8080")
-	http.ListenAndServe(":8080", nil)
+	cfg := loadConfig()
+	srv := &http.Server{
+		Addr:         cfg.Addr,
+		Handler:      newMux(),
+		ReadTimeout:  10 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  60 * time.Second,
+	}
+	fmt.Println("browser-monitor listening on", cfg.Addr)
+	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		fmt.Println("server error:", err)
+	}
 }
-
-
-// startup banner for ops visibility
-
-
-// boot: loadConfig drives Addr and batch limits (wired in Feb batch).
