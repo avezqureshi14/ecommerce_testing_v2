@@ -18,9 +18,11 @@ func handlePageView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if err := checkURL(pv.PageURL); err != nil {
+		noteRejected()
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	noteAccepted()
 	if err := checkSession(pv.SessionID); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
