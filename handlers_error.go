@@ -18,10 +18,18 @@ func handleErrorBeacon(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "bad json", http.StatusBadRequest)
 		return
 	}
-	if err := checkURL(eb.PageURL); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+	if err := checkURL(eb.PageURL); err != nil || checkSession(eb.SessionID) != nil {
+		noteRejected()
+		http.Error(w, "invalid error beacon", http.StatusBadRequest)
 		return
 	}
+	if strings.TrimSpace(eb.Message) == "" {
+		noteRejected()
+		http.Error(w, "message is required", http.StatusBadRequest)
+		return
+	}
+	eb.Message = strings.TrimSpace(eb.Message)
+	noteAccepted()
 	if len(eb.Stack) > 4000 {
 		eb.Stack = eb.Stack[:4000]
 	}
