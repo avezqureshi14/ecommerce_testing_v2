@@ -23,10 +23,12 @@ func handleVitals(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "unknown vital name", http.StatusBadRequest)
 		return
 	}
-	if err := checkURL(v.PageURL); err != nil {
-		http.Error(w, err.Error(), http.StatusBadRequest)
+	if err := checkURL(v.PageURL); err != nil || checkSession(v.SessionID) != nil {
+		noteRejected()
+		http.Error(w, "invalid vital", http.StatusBadRequest)
 		return
 	}
+	noteAccepted()
 	if vitals.Add(v) {
 		_ = vitals.Drain()
 	}
