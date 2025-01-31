@@ -25,3 +25,13 @@ func checkSession(s string) error {
 }
 
 // note: checkURL already permits query strings via ParseRequestURI; no change needed.
+
+func checkLoad(ms int64) error {
+	if ms < 0 {
+		return errors.New("load_ms cannot be negative")
+	}
+	if ms > 5*60*1000 {
+		return errors.New("load_ms looks like it was left running")
+	}
+	return nil
+}
