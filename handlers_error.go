@@ -8,6 +8,7 @@ import (
 )
 
 var errorEvents = newBatcher(200, 0)
+var errorDedupe = newDedupe(2 * time.Second)
 
 func handleErrorBeacon(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodPost {
