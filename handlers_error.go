@@ -31,6 +31,10 @@ func handleErrorBeacon(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	eb.Message = strings.TrimSpace(eb.Message)
+	if !errorDedupe.Fresh(fingerprint(eb.Message, eb.Stack), time.Now()) {
+		w.WriteHeader(http.StatusAccepted)
+		return
+	}
 	noteAccepted()
 	if len(eb.Stack) > 4000 {
 		eb.Stack = eb.Stack[:4000]
