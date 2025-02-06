@@ -42,3 +42,5 @@ func (l *Limiter) Allow(key string, now time.Time) bool {
 	b.tokens -= 1
 	return true
 }
+
+var sessionLimit = newLimiter(20, 40)
