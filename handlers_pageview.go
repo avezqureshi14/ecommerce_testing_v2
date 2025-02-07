@@ -13,6 +13,11 @@ func handlePageView(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
+	if !sessionLimit.Allow(r.Header.Get("X-Session")+r.RemoteAddr, time.Now()) {
+		noteRejected()
+		http.Error(w, "slow down", http.StatusTooManyRequests)
+		return
+	}
 	var pv PageView
 	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 64*1024)).Decode(&pv); err != nil {
 		http.Error(w, "bad json", http.StatusBadRequest)
