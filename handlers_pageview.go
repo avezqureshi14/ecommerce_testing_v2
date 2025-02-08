@@ -39,6 +39,7 @@ func handlePageView(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	recentPageViews.Push(pv)
 	ready := pageViews.Add(pv)
 	if ready {
 		_ = pageViews.Drain()
