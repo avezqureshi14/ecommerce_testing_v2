@@ -41,3 +41,5 @@ func (r *Recent) Snapshot() []any {
 	}
 	return out
 }
+
+var recentPageViews = newRecent(100)
