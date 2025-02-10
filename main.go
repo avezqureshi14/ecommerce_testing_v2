@@ -10,7 +10,7 @@ func main() {
 	cfg := loadConfig()
 	srv := &http.Server{
 		Addr:         cfg.Addr,
-		Handler:      newMux(),
+		Handler:      withCORS(newMux()),
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  60 * time.Second,
