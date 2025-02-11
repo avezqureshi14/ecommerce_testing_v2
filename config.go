@@ -23,6 +23,11 @@ func loadConfig() Config {
 			c.MaxBatchSize = n
 		}
 	}
+	if v := os.Getenv("MAX_BATCH_AGE_MS"); v != "" {
+		if n, err := strconv.Atoi(v); err == nil && n > 0 {
+			c.MaxBatchAge = time.Duration(n) * time.Millisecond
+		}
+	}
 	return c
 }
 
