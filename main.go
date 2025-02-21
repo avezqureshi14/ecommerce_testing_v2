@@ -18,8 +18,22 @@ func main() {
 		WriteTimeout: 10 * time.Second,
 		IdleTimeout:  60 * time.Second,
 	}
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
+	defer stop()
+	go runFlush(ctx, pageViews, cfg.MaxBatchAge)
+	go runFlush(ctx, errorEvents, cfg.MaxBatchAge)
+	go runFlush(ctx, vitals, cfg.MaxBatchAge)
 	fmt.Println("browser-monitor listening on", cfg.Addr)
-	if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		fmt.Println("server error:", err)
+	errCh := make(chan error, 1)
+	go func() { errCh <- srv.ListenAndServe() }()
+	select {
+	case <-ctx.Done():
+		shut, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		_ = srv.Shutdown(shut)
+	case err := <-errCh:
+		if err != nil && err != http.ErrServerClosed {
+			fmt.Println("server error:", err)
+		}
 	}
 }
