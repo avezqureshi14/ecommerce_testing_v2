@@ -35,3 +35,13 @@ func checkLoad(ms int64) error {
 	}
 	return nil
 }
+
+func checkVitalValue(name string, value float64) error {
+	if value < 0 {
+		return errors.New("vital value cannot be negative")
+	}
+	if name == "CLS" && value > 10 {
+		return errors.New("cls value is not plausible")
+	}
+	return nil
+}
