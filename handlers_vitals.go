@@ -20,7 +20,13 @@ func handleVitals(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if !knownVitals[v.Name] {
+		noteRejected()
 		http.Error(w, "unknown vital name", http.StatusBadRequest)
+		return
+	}
+	if err := checkVitalValue(v.Name, v.Value); err != nil {
+		noteRejected()
+		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
 	if err := checkURL(v.PageURL); err != nil || checkSession(v.SessionID) != nil {
