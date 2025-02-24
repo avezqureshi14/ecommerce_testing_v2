@@ -35,6 +35,7 @@ func handleVitals(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	noteAccepted()
+	noteVitalClass(classifyVital(v.Name, v.Value))
 	if vitals.Add(v) {
 		_ = vitals.Drain()
 	}
