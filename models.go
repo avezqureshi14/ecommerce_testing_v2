@@ -6,6 +6,7 @@ type PageView struct {
 	SessionID string `json:"session_id"`
 	Referrer  string `json:"referrer,omitempty"`
 	LoadMs    int64  `json:"load_ms"`
+	UserAgent string `json:"user_agent,omitempty"`
 }
 
 // ErrorBeacon captures a client-side failure.
