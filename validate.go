@@ -45,3 +45,11 @@ func checkVitalValue(name string, value float64) error {
 	}
 	return nil
 }
+
+func clipUA(ua string) string {
+	ua = strings2.TrimSpace(ua)
+	if len(ua) > 180 {
+		return ua[:180]
+	}
+	return ua
+}
