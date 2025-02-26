@@ -53,3 +53,15 @@ func clipUA(ua string) string {
 	}
 	return ua
 }
+
+func checkNav(nav string) error {
+	if nav == "" {
+		return nil
+	}
+	switch nav {
+	case "navigate", "reload", "back_forward", "prerender":
+		return nil
+	default:
+		return errors.New("nav_type is not one we store")
+	}
+}
