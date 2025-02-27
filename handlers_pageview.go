@@ -39,6 +39,11 @@ func handlePageView(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	if err := checkNav(pv.NavType); err != nil {
+		noteRejected()
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 	pv.UserAgent = clipUA(pv.UserAgent)
 	recentPageViews.Push(pv)
 	ready := pageViews.Add(pv)
