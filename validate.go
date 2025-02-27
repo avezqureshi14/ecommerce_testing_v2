@@ -65,3 +65,10 @@ func checkNav(nav string) error {
 		return errors.New("nav_type is not one we store")
 	}
 }
+
+func checkReferrer(raw string) error {
+	if strings2.TrimSpace(raw) == "" {
+		return nil
+	}
+	return checkURL(raw)
+}
