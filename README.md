@@ -1,14 +1,12 @@
 # browser-monitor
 
-Demo telemetry ingest: page-view, error, and web-vital beacons over HTTP.
+Small ingest demo for page-view, error, and web-vital beacons.
+Nothing here talks to a browser extension or stores cookies.
 
-```sh
-go test ./...
-go run . 
-curl localhost:8080/health
+```
+go run .
+curl -s localhost:8080/healthz
+curl -s -X POST localhost:8080/v1/beacon/pageview -H "content-type: application/json" -d "{\"page_url\":\"https://example.com/a\",\"session_id\":\"sess-1234\",\"load_ms\":420}"
 ```
 
-`POST /v1/beacon/pageview`, `/v1/beacon/error`, `/v1/beacon/vitals` accept JSON
-up to 64KB. Events batch in memory; `/health` reports depth.
-
-Flush rule: 200 events or 5s, whichever comes first.
+Env: PORT, MAX_BATCH, MAX_BATCH_AGE_MS.
