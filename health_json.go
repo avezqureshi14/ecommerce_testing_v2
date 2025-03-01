@@ -15,6 +15,7 @@ func handleHealthJSON(w http.ResponseWriter, r *http.Request) {
 		"ok":        true,
 		"accepted":  acceptedCount.Load(),
 		"rejected":  rejectedCount.Load(),
+		"limited":   limitedCount.Load(),
 		"pageviews": pageViews.Len(),
 		"errors":    errorEvents.Len(),
 		"vitals":    vitals.Len(),
