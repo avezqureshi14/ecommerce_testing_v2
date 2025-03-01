@@ -26,3 +26,7 @@ func noteVitalClass(class string) {
 		vitalPoor.Add(1)
 	}
 }
+
+var limitedCount atomic.Int64
+
+func noteLimited() { limitedCount.Add(1) }
