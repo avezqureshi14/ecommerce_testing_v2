@@ -50,6 +50,11 @@ func handlePageView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	pv.UserAgent = clipUA(pv.UserAgent)
+	if pageViews.Len() >= 5000 {
+		noteRejected()
+		http.Error(w, "queue full", http.StatusServiceUnavailable)
+		return
+	}
 	recentPageViews.Push(pv)
 	ready := pageViews.Add(pv)
 	if ready {
