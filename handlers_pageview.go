@@ -14,7 +14,7 @@ func handlePageView(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if !sessionLimit.Allow(r.Header.Get("X-Session")+r.RemoteAddr, time.Now()) {
-		noteRejected()
+		noteLimited()
 		http.Error(w, "slow down", http.StatusTooManyRequests)
 		return
 	}
