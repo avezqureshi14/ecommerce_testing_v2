@@ -14,6 +14,11 @@ func handleVitals(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
+	if vitals.Len() >= 5000 {
+		noteRejected()
+		http.Error(w, "queue full", http.StatusServiceUnavailable)
+		return
+	}
 	var v VitalBeacon
 	if err := json.NewDecoder(http.MaxBytesReader(w, r.Body, 32*1024)).Decode(&v); err != nil {
 		http.Error(w, "bad json", http.StatusBadRequest)
