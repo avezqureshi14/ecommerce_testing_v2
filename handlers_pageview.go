@@ -13,6 +13,11 @@ func handlePageView(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
+	if !wantsJSON(r) {
+		noteRejected()
+		http.Error(w, "content-type must be application/json", http.StatusUnsupportedMediaType)
+		return
+	}
 	if !sessionLimit.Allow(r.Header.Get("X-Session")+r.RemoteAddr, time.Now()) {
 		noteLimited()
 		http.Error(w, "slow down", http.StatusTooManyRequests)
