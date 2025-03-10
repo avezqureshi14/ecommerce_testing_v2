@@ -14,6 +14,11 @@ func handleVitals(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
+	if !wantsJSON(r) {
+		noteRejected()
+		http.Error(w, "content-type must be application/json", http.StatusUnsupportedMediaType)
+		return
+	}
 	if vitals.Len() >= 5000 {
 		noteRejected()
 		http.Error(w, "queue full", http.StatusServiceUnavailable)
