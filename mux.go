@@ -8,6 +8,7 @@ func newMux() *http.ServeMux {
 	mux.HandleFunc("/healthz", handleHealthJSON)
 	mux.HandleFunc("/v1/recent", handleRecent)
 	mux.HandleFunc("/v1/beacon/pageview", handlePageView)
+	mux.HandleFunc("/v1/beacon/pageview/batch", handlePageBatch)
 	mux.HandleFunc("/v1/beacon/error", handleErrorBeacon)
 	mux.HandleFunc("/v1/beacon/vitals", handleVitals)
 	return mux
