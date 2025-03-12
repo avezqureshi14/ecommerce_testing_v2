@@ -36,3 +36,21 @@ func TestCheckLoad(t *testing.T) {
 		t.Fatal("runaway load")
 	}
 }
+
+func TestCheckNavAndReferrer(t *testing.T) {
+	if err := checkNav(""); err != nil {
+		t.Fatal(err)
+	}
+	if err := checkNav("reload"); err != nil {
+		t.Fatal(err)
+	}
+	if checkNav("typed") == nil {
+		t.Fatal("typed is not stored")
+	}
+	if err := checkReferrer(""); err != nil {
+		t.Fatal(err)
+	}
+	if checkReferrer("notaurl") == nil {
+		t.Fatal("bad referrer")
+	}
+}
