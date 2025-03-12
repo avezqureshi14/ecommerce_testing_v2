@@ -24,3 +24,15 @@ func TestCheckSession(t *testing.T) {
 }
 
 // http scheme is accepted alongside https.
+
+func TestCheckLoad(t *testing.T) {
+	if err := checkLoad(0); err != nil {
+		t.Fatal(err)
+	}
+	if checkLoad(-1) == nil {
+		t.Fatal("negative load")
+	}
+	if checkLoad(6*60*1000) == nil {
+		t.Fatal("runaway load")
+	}
+}
