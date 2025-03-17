@@ -21,6 +21,9 @@ func checkSession(s string) error {
 	if len(s) < 8 {
 		return errors.New("session_id too short")
 	}
+	if len(s) > 64 {
+		return errors.New("session_id too long")
+	}
 	return nil
 }
 
