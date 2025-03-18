@@ -30,6 +30,7 @@ func handleVitals(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "bad json", http.StatusBadRequest)
 		return
 	}
+	v.Name = strings.ToUpper(strings.TrimSpace(v.Name))
 	if v.Name == "" || !knownVitals[v.Name] {
 		noteRejected()
 		http.Error(w, "unknown vital name", http.StatusBadRequest)
