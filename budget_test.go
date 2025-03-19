@@ -21,6 +21,12 @@ func TestClassifyVitalBoundaries(t *testing.T) {
 	if classifyVital("TTFB", 800) != "good" {
 		t.Fatal("ttfb good edge")
 	}
+	if classifyVital("INP", 500) != "needs-improvement" {
+		t.Fatal("inp 500")
+	}
+	if classifyVital("INP", 501) != "poor" {
+		t.Fatal("inp 501")
+	}
 	if classifyVital("nope", 1) != "unknown" {
 		t.Fatal("unknown name")
 	}
