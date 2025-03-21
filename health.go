@@ -11,5 +11,5 @@ func handleHealth(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.Header().Set("Content-Type", "text/plain")
-	fmt.Fprintf(w, "ok queue_depth=%d accepted=%d rejected=%d\n", pageViews.Len(), acceptedCount.Load(), rejectedCount.Load())
+	fmt.Fprintf(w, "ok queue_depth=%d accepted=%d rejected=%d poor_vitals=%d\n", pageViews.Len(), acceptedCount.Load(), rejectedCount.Load(), vitalPoor.Load())
 }
