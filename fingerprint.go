@@ -16,7 +16,7 @@ func fingerprint(message, stack string) string {
 	top := ""
 	for _, line := range strings.Split(stack, "\n") {
 		line = strings.TrimSpace(line)
-		if line == "" {
+		if line == "" || line == "undefined" {
 			continue
 		}
 		top = numRe.ReplaceAllString(strings.ToLower(line), "#")
