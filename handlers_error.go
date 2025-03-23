@@ -46,6 +46,7 @@ func handleErrorBeacon(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	noteAccepted()
+	eb.Stack = strings.TrimSpace(eb.Stack)
 	if len(eb.Stack) > 4000 {
 		eb.Stack = eb.Stack[:4000]
 	}
