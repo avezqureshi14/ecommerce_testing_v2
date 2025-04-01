@@ -4,6 +4,9 @@ import "testing"
 
 func TestRecentDropsOldest(t *testing.T) {
 	r := newRecent(2)
+	if len(r.Snapshot()) != 0 {
+		t.Fatal("empty ring")
+	}
 	r.Push("a")
 	r.Push("b")
 	r.Push("c")
