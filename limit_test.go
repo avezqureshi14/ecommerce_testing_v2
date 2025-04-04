@@ -18,4 +18,8 @@ func TestLimiterRefills(t *testing.T) {
 	if !l.Allow("s", later) {
 		t.Fatal("should have refilled")
 	}
+	l2 := newLimiter(1, 1)
+	if !l2.Allow("other", now) {
+		t.Fatal("other session")
+	}
 }
