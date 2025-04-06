@@ -12,4 +12,7 @@ func TestFingerprintIgnoresLineNumbers(t *testing.T) {
 	if a == c {
 		t.Fatal("different messages should not collapse")
 	}
+	if fingerprint("only message", "") == "" {
+		t.Fatal("empty stack still has a hash")
+	}
 }
