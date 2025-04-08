@@ -28,6 +28,7 @@ func main() {
 	go func() { errCh <- srv.ListenAndServe() }()
 	select {
 	case <-ctx.Done():
+		// five seconds is enough to drain the flush loops on a laptop
 		shut, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 		_ = srv.Shutdown(shut)
