@@ -10,6 +10,8 @@ var (
 	rejectedCount atomic.Int64
 )
 
+const maxQueued = 5000
+
 func noteAccepted() { acceptedCount.Add(1) }
 func noteRejected() { rejectedCount.Add(1) }
 
