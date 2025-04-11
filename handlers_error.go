@@ -36,7 +36,7 @@ func handleErrorBeacon(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	eb.Message = strings.TrimSpace(eb.Message)
-	if errorEvents.Len() >= 5000 {
+	if errorEvents.Len() >= maxQueued {
 		noteRejected()
 		http.Error(w, "queue full", http.StatusServiceUnavailable)
 		return
