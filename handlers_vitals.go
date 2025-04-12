@@ -20,7 +20,7 @@ func handleVitals(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "content-type must be application/json", http.StatusUnsupportedMediaType)
 		return
 	}
-	if vitals.Len() >= 5000 {
+	if vitals.Len() >= maxQueued {
 		noteRejected()
 		http.Error(w, "queue full", http.StatusServiceUnavailable)
 		return
