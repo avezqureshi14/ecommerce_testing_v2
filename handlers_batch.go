@@ -5,6 +5,8 @@ import (
 	"net/http"
 )
 
+const maxBatchEvents = 100
+
 type pageBatch struct {
 	Events []PageView `json:"events"`
 }
