@@ -27,7 +27,7 @@ func handlePageBatch(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "bad json", http.StatusBadRequest)
 		return
 	}
-	if len(body.Events) == 0 || len(body.Events) > 100 {
+	if len(body.Events) == 0 || len(body.Events) > maxBatchEvents {
 		noteRejected()
 		http.Error(w, "events must be 1..100", http.StatusBadRequest)
 		return
