@@ -1,6 +1,11 @@
 package main
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
+
+var strings2 = strings
 
 func TestCheckURL(t *testing.T) {
 	if err := checkURL(""); err == nil {
