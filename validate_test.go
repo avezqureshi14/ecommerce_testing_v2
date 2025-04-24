@@ -30,6 +30,16 @@ func TestCheckSession(t *testing.T) {
 
 // http scheme is accepted alongside https.
 
+func TestClipUA(t *testing.T) {
+	if clipUA("  hi  ") != "hi" {
+		t.Fatal("trim")
+	}
+	long := strings2.Repeat("a", 200)
+	if len(clipUA(long)) != 180 {
+		t.Fatal("clip")
+	}
+}
+
 func TestCheckLoad(t *testing.T) {
 	if err := checkLoad(0); err != nil {
 		t.Fatal(err)
