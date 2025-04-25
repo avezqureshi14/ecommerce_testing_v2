@@ -40,6 +40,12 @@ func TestClipUA(t *testing.T) {
 	}
 }
 
+func TestFragmentURL(t *testing.T) {
+	if err := checkURL("https://example.com/app#tab"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckLoad(t *testing.T) {
 	if err := checkLoad(0); err != nil {
 		t.Fatal(err)
