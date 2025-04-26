@@ -40,6 +40,12 @@ func TestClipUA(t *testing.T) {
 	}
 }
 
+func TestJavascriptURL(t *testing.T) {
+	if checkURL("javascript:alert(1)") == nil {
+		t.Fatal("javascript scheme")
+	}
+}
+
 func TestFragmentURL(t *testing.T) {
 	if err := checkURL("https://example.com/app#tab"); err != nil {
 		t.Fatal(err)
