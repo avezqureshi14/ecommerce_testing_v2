@@ -40,6 +40,12 @@ func TestClipUA(t *testing.T) {
 	}
 }
 
+func TestDataURL(t *testing.T) {
+	if checkURL("data:text/html,hi") == nil {
+		t.Fatal("data scheme")
+	}
+}
+
 func TestJavascriptURL(t *testing.T) {
 	if checkURL("javascript:alert(1)") == nil {
 		t.Fatal("javascript scheme")
