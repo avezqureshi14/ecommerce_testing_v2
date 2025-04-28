@@ -40,6 +40,15 @@ func TestClipUA(t *testing.T) {
 	}
 }
 
+func TestShortSession(t *testing.T) {
+	if checkSession("1234567") == nil {
+		t.Fatal("7 chars")
+	}
+	if err := checkSession("12345678"); err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestDataURL(t *testing.T) {
 	if checkURL("data:text/html,hi") == nil {
 		t.Fatal("data scheme")
