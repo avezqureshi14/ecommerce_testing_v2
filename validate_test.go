@@ -47,6 +47,9 @@ func TestShortSession(t *testing.T) {
 	if err := checkSession("12345678"); err != nil {
 		t.Fatal(err)
 	}
+	if checkSession(strings2.Repeat("a", 65)) == nil {
+		t.Fatal("65 chars")
+	}
 }
 
 func TestDataURL(t *testing.T) {
