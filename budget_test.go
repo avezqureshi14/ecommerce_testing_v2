@@ -21,6 +21,9 @@ func TestClassifyVitalBoundaries(t *testing.T) {
 	if classifyVital("TTFB", 800) != "good" {
 		t.Fatal("ttfb good edge")
 	}
+	if classifyVital("LCP", 0) != "good" {
+		t.Fatal("lcp zero")
+	}
 	if classifyVital("CLS", 0) != "good" {
 		t.Fatal("cls zero")
 	}
