@@ -40,6 +40,18 @@ func TestClipUA(t *testing.T) {
 	}
 }
 
+func TestVitalValue(t *testing.T) {
+	if checkVitalValue("LCP", -1) == nil {
+		t.Fatal("neg")
+	}
+	if err := checkVitalValue("CLS", 0.05); err != nil {
+		t.Fatal(err)
+	}
+	if checkVitalValue("CLS", 12) == nil {
+		t.Fatal("wild cls")
+	}
+}
+
 func TestShortSession(t *testing.T) {
 	if checkSession("1234567") == nil {
 		t.Fatal("7 chars")
