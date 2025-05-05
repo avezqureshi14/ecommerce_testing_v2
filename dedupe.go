@@ -28,7 +28,7 @@ func (d *Dedupe) Fresh(fp string, now time.Time) bool {
 		return false
 	}
 	d.seen[fp] = now.Add(d.window)
-	if len(d.seen) > 5000 {
+	if len(d.seen) > 4000 {
 		for k, exp := range d.seen {
 			if !now.Before(exp) {
 				delete(d.seen, k)
