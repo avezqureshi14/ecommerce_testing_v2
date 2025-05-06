@@ -17,4 +17,7 @@ func TestDedupeWindow(t *testing.T) {
 	if !d.Fresh("abc", now.Add(2*time.Second)) {
 		t.Fatal("window passed")
 	}
+	if !d.Fresh("other", now) {
+		t.Fatal("different key")
+	}
 }
