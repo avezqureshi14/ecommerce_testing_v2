@@ -32,6 +32,10 @@ func (b *Batcher) Add(ev any) bool {
 func (b *Batcher) Drain() []any {
 	b.mu.Lock()
 	defer b.mu.Unlock()
+	if len(b.events) == 0 {
+		b.lastPush = time.Now()
+		return nil
+	}
 	out := b.events
 	b.events = nil
 	b.lastPush = time.Now()
