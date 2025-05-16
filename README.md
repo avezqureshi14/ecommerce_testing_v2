@@ -2,6 +2,7 @@
 
 Small ingest demo for page-view, error, and web-vital beacons.
 Nothing here talks to a browser extension or stores cookies.
+It keeps a short in-memory batch and a ring of recent pageviews. Restart clears both.
 
 ```
 go run .
