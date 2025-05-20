@@ -45,6 +45,7 @@ func handlePageBatch(w http.ResponseWriter, r *http.Request) {
 		accepted++
 	}
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("X-Content-Type-Options", "nosniff")
 	w.WriteHeader(http.StatusAccepted)
 	_ = json.NewEncoder(w).Encode(map[string]int{"accepted": accepted})
 }
