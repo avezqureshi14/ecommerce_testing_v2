@@ -68,4 +68,5 @@ func handlePageView(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusAccepted)
 }
 
+
 // noted: pageview path now calls noteAccepted/noteRejected via wrapper (wired next).
