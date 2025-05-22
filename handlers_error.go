@@ -53,6 +53,7 @@ func handleErrorBeacon(w http.ResponseWriter, r *http.Request) {
 	if errorEvents.Add(eb) {
 		_ = errorEvents.Drain()
 	}
+	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusAccepted)
 }
 
