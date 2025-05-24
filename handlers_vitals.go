@@ -47,7 +47,7 @@ func handleVitals(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	noteAccepted()
-	v.Rating = classifyVital(v.Name, v.Value)
+	v.Rating = classifyVital(v.Name, v.Value) // client rating is not trusted
 	noteVitalClass(v.Rating)
 	if vitals.Add(v) {
 		_ = vitals.Drain()
