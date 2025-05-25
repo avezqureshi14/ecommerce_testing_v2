@@ -8,6 +8,7 @@ type PageView struct {
 	LoadMs    int64  `json:"load_ms"`
 	UserAgent string `json:"user_agent,omitempty"`
 	NavType   string `json:"nav_type,omitempty"`
+	ViewportW int    `json:"viewport_w,omitempty"`
 }
 
 // ErrorBeacon captures a client-side failure.
