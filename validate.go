@@ -69,6 +69,13 @@ func checkNav(nav string) error {
 	}
 }
 
+func checkViewport(w int) error {
+	if w < 0 || w > 20000 {
+		return errors.New("viewport_w is not plausible")
+	}
+	return nil
+}
+
 func checkReferrer(raw string) error {
 	if strings2.TrimSpace(raw) == "" {
 		return nil
