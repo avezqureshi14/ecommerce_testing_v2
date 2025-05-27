@@ -54,6 +54,11 @@ func handlePageView(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+	if err := checkViewport(pv.ViewportW); err != nil {
+		noteRejected()
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
 	pv.UserAgent = clipUA(pv.UserAgent)
 	if pageViews.Len() >= maxQueued {
 		noteRejected()
