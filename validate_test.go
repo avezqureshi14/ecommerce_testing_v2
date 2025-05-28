@@ -40,6 +40,18 @@ func TestClipUA(t *testing.T) {
 	}
 }
 
+func TestViewport(t *testing.T) {
+	if err := checkViewport(0); err != nil {
+		t.Fatal(err)
+	}
+	if checkViewport(-4) == nil {
+		t.Fatal("neg")
+	}
+	if checkViewport(20001) == nil {
+		t.Fatal("huge")
+	}
+}
+
 func TestVitalValue(t *testing.T) {
 	if checkVitalValue("LCP", -1) == nil {
 		t.Fatal("neg")
