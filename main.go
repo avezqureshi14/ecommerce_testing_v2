@@ -16,7 +16,7 @@ func main() {
 		Handler:      withCORS(newMux()),
 		ReadTimeout:  10 * time.Second,
 		WriteTimeout: 10 * time.Second,
-		IdleTimeout:  60 * time.Second,
+		IdleTimeout:  75 * time.Second,
 	}
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt)
 	defer stop()
