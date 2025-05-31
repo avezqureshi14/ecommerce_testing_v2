@@ -19,6 +19,9 @@ func fingerprint(message, stack string) string {
 		if line == "" || line == "undefined" {
 			continue
 		}
+		if len(line) > 240 {
+			line = line[:240]
+		}
 		top = numRe.ReplaceAllString(strings.ToLower(line), "#")
 		break
 	}
