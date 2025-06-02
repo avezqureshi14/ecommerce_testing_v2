@@ -32,3 +32,11 @@ func noteVitalClass(class string) {
 var limitedCount atomic.Int64
 
 func noteLimited() { limitedCount.Add(1) }
+
+var withReferrer atomic.Int64
+
+func noteReferrer(ref string) {
+	if ref != "" {
+		withReferrer.Add(1)
+	}
+}
