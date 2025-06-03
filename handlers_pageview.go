@@ -65,6 +65,7 @@ func handlePageView(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "queue full", http.StatusServiceUnavailable)
 		return
 	}
+	noteReferrer(pv.Referrer)
 	recentPageViews.Push(pv)
 	ready := pageViews.Add(pv)
 	if ready {
