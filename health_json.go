@@ -20,6 +20,8 @@ func handleHealthJSON(w http.ResponseWriter, r *http.Request) {
 		"referrers": withReferrer.Load(),
 		"pageviews": pageViews.Len(),
 		"errors":    errorEvents.Len(),
-		"vitals":    vitals.Len(),
+		"vitals":      vitals.Len(),
+		"vital_good":  vitalGood.Load(),
+		"vital_poor":  vitalPoor.Load(),
 	})
 }
