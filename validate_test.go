@@ -5,8 +5,6 @@ import (
 	"testing"
 )
 
-var strings2 = strings
-
 func TestCheckURL(t *testing.T) {
 	if err := checkURL(""); err == nil {
 		t.Fatal("expected error for empty url")
@@ -34,7 +32,7 @@ func TestClipUA(t *testing.T) {
 	if clipUA("  hi  ") != "hi" {
 		t.Fatal("trim")
 	}
-	long := strings2.Repeat("a", 200)
+	long := strings.Repeat("a", 200)
 	if len(clipUA(long)) != 180 {
 		t.Fatal("clip")
 	}
@@ -71,7 +69,7 @@ func TestShortSession(t *testing.T) {
 	if err := checkSession("12345678"); err != nil {
 		t.Fatal(err)
 	}
-	if checkSession(strings2.Repeat("a", 65)) == nil {
+	if checkSession(strings.Repeat("a", 65)) == nil {
 		t.Fatal("65 chars")
 	}
 }
